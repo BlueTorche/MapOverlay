@@ -1,10 +1,11 @@
 import DataClass.EventPoint;
 import DataClass.Point;
+import DataClass.Segment;
 import DataStructures.AVLTree;
 import DataStructures.BSTree;
 
 public class AVLTreeTest {
-	public static void main(String[] args) {
+	public static void main2(String[] args) {
 		BSTree<Point> t = new AVLTree<>();
 
 		System.out.println(t.searchMin());
@@ -30,5 +31,12 @@ public class AVLTreeTest {
 
 		System.out.println(t.searchMax());
 		System.out.println("-----------");
+	}
+
+
+	public static void main(String[] args) {
+		Segment s1 = new Segment(1, 7, 9, 3);
+		Segment s2 = new Segment(4, 1, 6, 9);
+		System.out.println(s1.getIntersectionWith(s2));
 	}
 }
