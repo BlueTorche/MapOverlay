@@ -20,9 +20,18 @@ public class Segment implements Comparable<Segment> {
     public Point getStartPoint() {return this.startPoint;}
     public Point getEndPoint() {return this.endPoint;}
 
+    public Point getIntersectionWith(Segment s) {
+
+        return null;
+    }
+
     @Override
     public int compareTo(Segment s) {
-        return 1; //TODO make the comparaison
+        if (startPoint.compareTo(s.startPoint) == 0 && endPoint.compareTo(s.endPoint) == 0)
+            return 0;
+        if (startPoint.compareTo(s.startPoint) > 0)
+            return -1;
+        return 1; //TODO make the good comparaison
     }
 
     // Implémentation de la méthode toString() pour afficher la valeur de manière lisible

@@ -25,6 +25,10 @@ public class EventPoint implements Comparable<EventPoint> {
     public void addSegment(Segment s) { this.segments.add(s); }
     public void addAllSegment(Set<Segment> s) { this.segments.addAll(s); }
 
+    public Set<Segment> getSegments() { return this.segments; }
+    public Point getPoint() { return this.point; }
+
+
     @Override
     public int compareTo(EventPoint q) { return this.point.compareTo(q.point); }
 
