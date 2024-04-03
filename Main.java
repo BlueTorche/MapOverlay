@@ -24,9 +24,11 @@ public class Main {
 
     public static void FindIntersection(Set<Segment> segments) {
         for (Segment s : segments) {
-            Q.insert(s.getStartPoint());
-            Q.insert(s.getEndPoint());
+            Q.insert(new EventPoint(s.getStartPoint(), s));
+            Q.insert(new EventPoint(s.getEndPoint()  , s));
         }
+
+        Q.print();
 
         while (!Q.isEmpty()) {
             EventPoint p = Q.suppressMin();
