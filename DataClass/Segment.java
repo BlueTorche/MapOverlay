@@ -1,25 +1,33 @@
 package DataClass;
 
 public class Segment implements Comparable<Segment> {
-    protected int x1,y1,x2,y2;
-    protected int ySweepline;
+    protected EventPoint startPoint;
+    protected EventPoint endPoint;
 
-    public Segment(int x1, int y1, int x2, int y2) {
-        this.x1 = x1;
-        this.y1 = y1;
-        this.x2 = x2;
-        this.y2 = y2;
+    public Segment(float x1, float y1, float x2, float y2) {
+        EventPoint p = new EventPoint(x1, y1);
+        EventPoint q = new EventPoint(x2, y2);
+        if (p.compareTo(q) < 0) {
+            this.startPoint = p;
+            this.endPoint   = q;
+        }
+        else {
+            this.startPoint = q;
+            this.endPoint   = p;
+        }
     }
+
+    public EventPoint getStartPoint() {return this.startPoint;}
+    public EventPoint getEndPoint() {return this.endPoint;}
 
     @Override
     public int compareTo(Segment s) {
-        return 1;
+        return 1; //TODO make the comparaison
     }
 
     // Implémentation de la méthode toString() pour afficher la valeur de manière lisible
     @Override
     public String toString() {
-        return Integer.toString(this.x1) + " " + Integer.toString(this.y1) + ";" +
-                Integer.toString(this.x2) + " " + Integer.toString(this.y2);
+        return "(" + startPoint.toString() + ");(" + endPoint.toString() + ")";
     }
 }

@@ -1,9 +1,9 @@
 package DataClass;
 
 public class EventPoint implements Comparable<EventPoint> {
-    protected int x,y;
+    protected float x,y;
 
-    public EventPoint(int x, int y) {
+    public EventPoint(float x, float y) {
         this.x = x;
         this.y = y;
     }
@@ -21,6 +21,6 @@ public class EventPoint implements Comparable<EventPoint> {
     // Implémentation de la méthode toString() pour afficher la valeur de manière lisible
     @Override
     public String toString() {
-        return Integer.toString(this.x) + " " + Integer.toString(this.y);
+        return this.x + " " + this.y;
     }
 }
