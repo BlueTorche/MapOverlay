@@ -1,3 +1,5 @@
+package Main;
+
 import DataClass.EventPoint;
 import DataClass.Point;
 import DataClass.Segment;

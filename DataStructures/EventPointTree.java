@@ -22,4 +22,12 @@ public class EventPointTree<D extends EventPoint> extends AVLTree<D> {
             equilibrate();
         }
     }
+
+
+    public EventPointTree<D> getLeft() {
+        return (EventPointTree<D>) super.getLeft();
+    }
+    public EventPointTree<D> getRight() {
+        return (EventPointTree<D>) super.getRight();
+    }
 }

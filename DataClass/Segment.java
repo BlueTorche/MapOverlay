@@ -1,5 +1,7 @@
 package DataClass;
 
+import Main.Main;
+
 public class Segment implements Comparable<Segment> {
     protected Point startPoint;
     protected Point endPoint;
@@ -50,16 +52,41 @@ public class Segment implements Comparable<Segment> {
         return new Point(intersection_x, intersection_y);
     }
 
-    @Override
-    public int compareTo(Segment s) {
-        if (startPoint.compareTo(s.startPoint) == 0 && endPoint.compareTo(s.endPoint) == 0)
-            return 0;
-        if (startPoint.compareTo(s.startPoint) > 0)
-            return -1;
-        return 1; //TODO make the good comparaison
+    public float getIntersectionWithSweepline(float y) {
+        float[] Direction1 = {endPoint.x-startPoint.x, endPoint.y-startPoint.y};
+
+        float t = (y - startPoint.y)/Direction1[1];
+
+        return startPoint.x + t * Direction1[0];
     }
 
-    // Implémentation de la méthode toString() pour afficher la valeur de manière lisible
+    @Override
+    public int compareTo(Segment s) {
+        float x1 = this.getIntersectionWithSweepline(Main.ySweepLine);
+        float x2 =     s.getIntersectionWithSweepline(Main.ySweepLine);
+
+        // Check who intersect the SweepLine first
+        if (x1 < x2)
+            return -1;
+        else if (x1 > x2)
+            return 1;
+
+        // Check if there is horizontal segment (or if segment ends on the SweepLine (shouldn't happen)
+        else if (endPoint.y == Main.ySweepLine && s.getEndPoint().y == Main.ySweepLine)
+            return 0;
+        else if (endPoint.y == Main.ySweepLine)
+            return 1;
+        else if (s.getEndPoint().y == Main.ySweepLine)
+            return -1;
+
+        // Check who has the higher (x-x_sweepline)/(y-y_sweepline)
+        else if ((endPoint.x - x1)/(endPoint.y - Main.ySweepLine) < (s.getEndPoint().x - x2)/(s.getEndPoint().y - Main.ySweepLine))
+            return -1;
+        else if ((endPoint.x - x1)/(endPoint.y - Main.ySweepLine) > (s.getEndPoint().x - x2)/(s.getEndPoint().y - Main.ySweepLine))
+            return 1;
+        return 0;
+    }
+
     @Override
     public String toString() {
         return "(" + startPoint.toString() + ");(" + endPoint.toString() + ")";

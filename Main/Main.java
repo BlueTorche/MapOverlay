@@ -1,9 +1,12 @@
+package Main;
+
 import DataClass.EventPoint;
 import DataClass.Segment;
 import DataClass.Point;
 import DataStructures.AVLTree;
 import DataStructures.BSTree;
 import DataStructures.EventPointTree;
+import DataStructures.SegmentTree;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -13,9 +16,12 @@ import java.util.Scanner;
 
 public class Main {
     static BSTree<EventPoint>  Q = new EventPointTree<>();
-    static BSTree<Segment>     T = new AVLTree<>();
+    static BSTree<Segment>     T = new SegmentTree<>();
 
     static Set<EventPoint> intersections = new HashSet<>();
+
+    public static float ySweepLine;
+
 
     public static void main(String[] args) {
         String filename = "cartes/fichier1.txt";
@@ -32,6 +38,7 @@ public class Main {
 
         while (!Q.isEmpty()) {
             EventPoint p = Q.suppressMin();
+            ySweepLine = p.getPoint().getY();
             HandleEventPoint(p);
         }
     }
@@ -53,7 +60,7 @@ public class Main {
                 C.add(s);
         }
 
-        // delete all Segments from L(p) u C(p) from T // TODO make intelligent suppression with an suppressAll
+        // delete all Segments from L(p) u C(p) from T // TODO make intelligent suppression with an suppressAll -> not useful
         for (Segment s : L)
             T.suppress(s);
         for (Segment s : C)

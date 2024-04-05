@@ -8,6 +8,8 @@ public class Point implements Comparable<Point> {
         this.y = y;
     }
 
+    public float getY() { return this.y; }
+
     @Override
     public int compareTo(Point q) {
         if (this.y == q.y && this.x == q.x)
